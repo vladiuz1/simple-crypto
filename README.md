@@ -15,10 +15,10 @@ python3 -m pip install -r requirements.txt
 Any of these command lines will work:
 
 ```
-echo "The quick brown fox jumps over the lazy dog" | python3 -s simpleAES.py encrypt
-python3 simpleAES.py -t The quick brown fox jumps over the lazy dog" encrypt
+echo "The quick brown fox jumps over the lazy dog" | python3 simpleAES.py -s encrypt
+python3 simpleAES.py -t "The quick brown fox jumps over the lazy dog" encrypt
 python3 simpleAES.py -f source.file.txt encrypt
-cat source.file.txt | python3 -s simpleAES.py encrypt
+cat source.file.txt | python3 simpleAES.py -s encrypt
 ```
 
 The output of the script will be something like:
@@ -36,8 +36,8 @@ The output of the script will be something like:
 To decrypt the result of the encryption simply use:
 
 ```
-python3 simpleAES.py -f encrypted.text.json encrypt
-cat encrypted.text.json | python3 -s simpleAES.py decrypt
+python3 simpleAES.py -f encrypted.obj.json decrypt
+cat encrypted.obj.json | python3 -s simpleAES.py decrypt
 ```
 
 ## Help
