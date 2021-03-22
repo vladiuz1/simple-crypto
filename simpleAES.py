@@ -20,7 +20,7 @@ def aes_encrypt(text, passphrase = None):
     """
     Encrypt text with passphrase
     :param text: The text to be encrypted.
-    :param passphrase:
+    :param passphrase: The key material
     :return:
     """
     if not passphrase:
@@ -46,13 +46,16 @@ def aes_encrypt(text, passphrase = None):
     return {
         'iv': hexlify(iv).decode('ascii'),
         'cipher-text': hexlify(ct).decode('ascii'),
-        'cipher-algo': algorithms.AES(hkdf).name,
-        'cipher-algo-key-size-bits': block_size * 8,
-        'cipher-mode': 'CBC',
-        'cipher-key-derivation-algo': f'HKDFExpand(algorithm=hashes.SHA256(), length={block_size}, info=None)'
+        'about': 'https://github.com/vladiuz1/simple-crypto'
     }
 
 def aes_decrypt(cipher_obj, passphrase = None):
+    """
+    Decrypt object with cypher text
+    :param cipher_obj: the json string with cipher text and iv
+    :param passphrase: optional passphrase the text was encrypted with
+    :return:
+    """
     cipher_text = unhexlify(cipher_obj.get('cipher-text'))
     iv = unhexlify(cipher_obj.get('iv'))
     if not passphrase:
@@ -110,7 +113,8 @@ if __name__ == '__main__':
         s = json.dumps(aes_encrypt(ctx.obj.get('input')),indent=2)
         if ctx.obj.get('qr'):
             print_ascii_qr(s, ctx.obj['invert'])
-        print(s)
+        else:
+            print(s)
 
     @cli.command()
     @click.pass_context
@@ -119,5 +123,6 @@ if __name__ == '__main__':
         s = aes_decrypt(json.loads(ctx.obj.get('input').encode('utf-8')))
         if ctx.obj.get('qr'):
             print_ascii_qr(s, ctx.obj['invert'])
-        print(s)
+        else:
+            print(s)
     cli()

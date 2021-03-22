@@ -1,10 +1,12 @@
 # simple-crypto
 
-A simple crypto sript to encrypt / decrypt text with AES256.
+A simple crypto script to encrypt / decrypt text with AES256.
 
 ## Install
 
 ```
+git pull https://github.com/vladiuz1/simple-crypto.git
+cd simple-crypto
 python3 -m pip install -r requirements.txt
 ```
 
